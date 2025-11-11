@@ -55,6 +55,7 @@
           <Property Name="DIACHI" Type="nvarchar" MaxLength="255" />
           <Property Name="SDT" Type="varchar" MaxLength="15" />
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="MATKHAU" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NHAPHANG">
           <Key>
@@ -312,6 +313,7 @@
           <Property Name="DIACHI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="NHAPHANG">
@@ -467,7 +469,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_NHASACHEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_NHASACHEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" />
           <EntitySet Name="CT_NHAPHANG" EntityType="Self.CT_NHAPHANG" />
@@ -519,7 +521,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities1">
+        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities2">
           <EntitySetMapping Name="ACCOUNTs">
             <EntityTypeMapping TypeName="QL_NHASACHModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
@@ -571,6 +573,7 @@
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

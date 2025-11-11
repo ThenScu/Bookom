@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="47f084babe56418382aa29ff22b5a4ed" Name="Diagram1">
+      <Diagram DiagramId="54899d09894843d0ba7f9e93745f6f97" Name="Diagram1">
         <EntityTypeShape EntityType="QL_NHASACHModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.CT_HOADON" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.CT_NHAPHANG" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.HOADON" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.NHAPHANG" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.NHASANXUAT" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_NHASACHModel.SACH" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
