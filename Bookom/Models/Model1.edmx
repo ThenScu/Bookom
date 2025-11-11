@@ -56,6 +56,7 @@
           <Property Name="SDT" Type="varchar" MaxLength="15" />
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
           <Property Name="MATKHAU" Type="varchar" MaxLength="50" />
+          <Property Name="MAACCOUNT" Type="int" />
         </EntityType>
         <EntityType Name="NHAPHANG">
           <Key>
@@ -166,6 +167,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KHACHHANG_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="MAACCOUNT" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
+              <PropertyRef Name="MAACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NHAPHANG_ACCOUNT">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
@@ -236,6 +249,10 @@
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_ACCOUNT" Association="Self.FK_KHACHHANG_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+          </AssociationSet>
           <AssociationSet Name="FK_NHAPHANG_ACCOUNT" Association="Self.FK_NHAPHANG_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
             <End Role="NHAPHANG" EntitySet="NHAPHANG" />
@@ -266,6 +283,7 @@
           <Property Name="DIACHI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TYPEACCOUNT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_ACCOUNT" FromRole="ACCOUNT" ToRole="HOADON" />
+          <NavigationProperty Name="KHACHHANGs" Relationship="Self.FK_KHACHHANG_ACCOUNT" FromRole="ACCOUNT" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHAPHANGs" Relationship="Self.FK_NHAPHANG_ACCOUNT" FromRole="ACCOUNT" ToRole="NHAPHANG" />
         </EntityType>
         <EntityType Name="CT_HOADON">
@@ -314,6 +332,8 @@
           <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="MATKHAU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MAACCOUNT" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK_KHACHHANG_ACCOUNT" FromRole="KHACHHANG" ToRole="ACCOUNT" />
           <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="NHAPHANG">
@@ -369,6 +389,18 @@
               <PropertyRef Name="MAACCOUNT" />
             </Principal>
             <Dependent Role="HOADON">
+              <PropertyRef Name="MAACCOUNT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KHACHHANG_ACCOUNT">
+          <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACCOUNT">
+              <PropertyRef Name="MAACCOUNT" />
+            </Principal>
+            <Dependent Role="KHACHHANG">
               <PropertyRef Name="MAACCOUNT" />
             </Dependent>
           </ReferentialConstraint>
@@ -469,7 +501,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_NHASACHEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_NHASACHEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" />
           <EntitySet Name="CT_NHAPHANG" EntityType="Self.CT_NHAPHANG" />
@@ -482,6 +514,10 @@
           <AssociationSet Name="FK_HOADON_ACCOUNT" Association="Self.FK_HOADON_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
             <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KHACHHANG_ACCOUNT" Association="Self.FK_KHACHHANG_ACCOUNT">
+            <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
           </AssociationSet>
           <AssociationSet Name="FK_NHAPHANG_ACCOUNT" Association="Self.FK_NHAPHANG_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNTs" />
@@ -521,7 +557,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities2">
+        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities3">
           <EntitySetMapping Name="ACCOUNTs">
             <EntityTypeMapping TypeName="QL_NHASACHModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
@@ -574,6 +610,7 @@
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="MAACCOUNT" ColumnName="MAACCOUNT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

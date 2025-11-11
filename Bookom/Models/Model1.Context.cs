@@ -13,10 +13,10 @@ namespace Bookom.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_NHASACHEntities2 : DbContext
+    public partial class QL_NHASACHEntities3 : DbContext
     {
-        public QL_NHASACHEntities2()
-            : base("name=QL_NHASACHEntities2")
+        public QL_NHASACHEntities3()
+            : base("name=QL_NHASACHEntities3")
         {
         }
     

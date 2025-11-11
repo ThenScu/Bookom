@@ -18,6 +18,7 @@ namespace Bookom.Models
         public ACCOUNT()
         {
             this.HOADONs = new HashSet<HOADON>();
+            this.KHACHHANGs = new HashSet<KHACHHANG>();
             this.NHAPHANGs = new HashSet<NHAPHANG>();
         }
     
@@ -31,6 +32,8 @@ namespace Bookom.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KHACHHANG> KHACHHANGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHAPHANG> NHAPHANGs { get; set; }
     }
