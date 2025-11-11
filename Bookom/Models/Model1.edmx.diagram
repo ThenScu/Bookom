@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a5de7e73c9f04c0ea53505c1e5ff8baa" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_NHASACHModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.CT_HOADON" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.CT_NHAPHANG" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.HOADON" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.NHAPHANG" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.NHASANXUAT" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.SACH" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.THELOAI" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_HOADON_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_NHAPHANG_ACCOUNT" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_HOADON" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_SACH" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_NHAPHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_SACH" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_NHASANXUAT" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_THELOAI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
