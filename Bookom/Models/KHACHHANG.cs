@@ -12,22 +12,21 @@ namespace Bookom.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HOADON
+    public partial class KHACHHANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HOADON()
+        public KHACHHANG()
         {
-            this.CT_HOADON = new HashSet<CT_HOADON>();
+            this.HOADONs = new HashSet<HOADON>();
         }
     
-        public int MAHD { get; set; }
-        public System.DateTime NGAYLAP { get; set; }
-        public Nullable<int> MAACCOUNT { get; set; }
-        public Nullable<int> MAKH { get; set; }
+        public int MAKH { get; set; }
+        public string TENKH { get; set; }
+        public string DIACHI { get; set; }
+        public string SDT { get; set; }
+        public string EMAIL { get; set; }
     
-        public virtual ACCOUNT ACCOUNT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }
-        public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual ICollection<HOADON> HOADONs { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace Bookom.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_NHASACHEntities : DbContext
+    public partial class QL_NHASACHEntities1 : DbContext
     {
-        public QL_NHASACHEntities()
-            : base("name=QL_NHASACHEntities")
+        public QL_NHASACHEntities1()
+            : base("name=QL_NHASACHEntities1")
         {
         }
     
@@ -29,6 +29,7 @@ namespace Bookom.Models
         public virtual DbSet<CT_HOADON> CT_HOADON { get; set; }
         public virtual DbSet<CT_NHAPHANG> CT_NHAPHANG { get; set; }
         public virtual DbSet<HOADON> HOADONs { get; set; }
+        public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
         public virtual DbSet<NHAPHANG> NHAPHANGs { get; set; }
         public virtual DbSet<NHASANXUAT> NHASANXUATs { get; set; }
         public virtual DbSet<SACH> SACHes { get; set; }

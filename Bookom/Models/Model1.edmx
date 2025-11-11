@@ -44,7 +44,14 @@
           <Property Name="MAHD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NGAYLAP" Type="date" Nullable="false" />
           <Property Name="MAACCOUNT" Type="int" />
-          <Property Name="TENKH" Type="nvarchar" MaxLength="100" />
+          <Property Name="MAKH" Type="int" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TENKH" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="DIACHI" Type="nvarchar" MaxLength="255" />
           <Property Name="SDT" Type="varchar" MaxLength="15" />
           <Property Name="EMAIL" Type="varchar" MaxLength="100" />
@@ -146,6 +153,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HOADON_KHACHHANG">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_NHAPHANG_ACCOUNT">
           <End Role="ACCOUNT" Type="Self.ACCOUNT" Multiplicity="0..1" />
           <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
@@ -187,6 +206,7 @@
           <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_NHAPHANG" EntityType="Self.CT_NHAPHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHAPHANG" EntityType="Self.NHAPHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHASANXUAT" EntityType="Self.NHASANXUAT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SACH" EntityType="Self.SACH" Schema="dbo" store:Type="Tables" />
@@ -209,6 +229,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_HOADON_ACCOUNT" Association="Self.FK_HOADON_ACCOUNT">
             <End Role="ACCOUNT" EntitySet="ACCOUNT" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HOADON_KHACHHANG" Association="Self.FK_HOADON_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
             <End Role="HOADON" EntitySet="HOADON" />
           </AssociationSet>
           <AssociationSet Name="FK_NHAPHANG_ACCOUNT" Association="Self.FK_NHAPHANG_ACCOUNT">
@@ -274,12 +298,21 @@
           <Property Name="MAHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NGAYLAP" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="MAACCOUNT" Type="Int32" />
-          <Property Name="TENKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MAKH" Type="Int32" />
+          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK_HOADON_ACCOUNT" FromRole="HOADON" ToRole="ACCOUNT" />
+          <NavigationProperty Name="CT_HOADON" Relationship="Self.FK_CT_HOADON_HOADON" FromRole="HOADON" ToRole="CT_HOADON" />
+          <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="HOADON" ToRole="KHACHHANG" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TENKH" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="DIACHI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ACCOUNT" Relationship="Self.FK_HOADON_ACCOUNT" FromRole="HOADON" ToRole="ACCOUNT" />
-          <NavigationProperty Name="CT_HOADON" Relationship="Self.FK_CT_HOADON_HOADON" FromRole="HOADON" ToRole="CT_HOADON" />
+          <NavigationProperty Name="HOADONs" Relationship="Self.FK_HOADON_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="NHAPHANG">
           <Key>
@@ -398,6 +431,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HOADON_KHACHHANG">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SACH_NHASANXUAT">
           <End Role="NHASANXUAT" Type="Self.NHASANXUAT" Multiplicity="0..1" />
           <End Role="SACH" Type="Self.SACH" Multiplicity="*" />
@@ -422,11 +467,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_NHASACHEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_NHASACHEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNTs" EntityType="Self.ACCOUNT" />
           <EntitySet Name="CT_HOADON" EntityType="Self.CT_HOADON" />
           <EntitySet Name="CT_NHAPHANG" EntityType="Self.CT_NHAPHANG" />
           <EntitySet Name="HOADONs" EntityType="Self.HOADON" />
+          <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
           <EntitySet Name="NHAPHANGs" EntityType="Self.NHAPHANG" />
           <EntitySet Name="NHASANXUATs" EntityType="Self.NHASANXUAT" />
           <EntitySet Name="SACHes" EntityType="Self.SACH" />
@@ -455,6 +501,10 @@
             <End Role="SACH" EntitySet="SACHes" />
             <End Role="CT_NHAPHANG" EntitySet="CT_NHAPHANG" />
           </AssociationSet>
+          <AssociationSet Name="FK_HOADON_KHACHHANG" Association="Self.FK_HOADON_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
+            <End Role="HOADON" EntitySet="HOADONs" />
+          </AssociationSet>
           <AssociationSet Name="FK_SACH_NHASANXUAT" Association="Self.FK_SACH_NHASANXUAT">
             <End Role="NHASANXUAT" EntitySet="NHASANXUATs" />
             <End Role="SACH" EntitySet="SACHes" />
@@ -469,7 +519,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities">
+        <EntityContainerMapping StorageEntityContainer="QL_NHASACHModelStoreContainer" CdmEntityContainer="QL_NHASACHEntities1">
           <EntitySetMapping Name="ACCOUNTs">
             <EntityTypeMapping TypeName="QL_NHASACHModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
@@ -509,6 +559,14 @@
                 <ScalarProperty Name="MAHD" ColumnName="MAHD" />
                 <ScalarProperty Name="NGAYLAP" ColumnName="NGAYLAP" />
                 <ScalarProperty Name="MAACCOUNT" ColumnName="MAACCOUNT" />
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANGs">
+            <EntityTypeMapping TypeName="QL_NHASACHModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="TENKH" ColumnName="TENKH" />
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
                 <ScalarProperty Name="SDT" ColumnName="SDT" />
