@@ -9,7 +9,6 @@
 
         @using (Html.BeginForm("Edit", "KhachHang", FormMethod.Post))
         {
-            @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.EMAIL)
 
             <div class="form-group mb-3">

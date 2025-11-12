@@ -40,14 +40,9 @@ namespace Bookom.Controllers
             return View(user);
         }
 
-        // POST: Cập nhật thông tin
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(ACCOUNT model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
             var user = data.ACCOUNTs.FirstOrDefault(u => u.EMAIL == model.EMAIL);
             if (user == null)
                 return HttpNotFound();
@@ -56,10 +51,9 @@ namespace Bookom.Controllers
             user.NAME = model.NAME;
             user.SDT = model.SDT;
             user.DIACHI = model.DIACHI;
-            
-            // user.EMAIL = model.EMAIL;
 
             data.SaveChanges();
+
             TempData["Success"] = "Cập nhật thông tin thành công!";
             return RedirectToAction("UserInfo");
         }
