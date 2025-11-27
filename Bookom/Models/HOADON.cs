@@ -22,8 +22,8 @@ namespace Bookom.Models
     
         public int MAHD { get; set; }
         public System.DateTime NGAYLAP { get; set; }
-        public Nullable<int> MAACCOUNT { get; set; }
         public Nullable<int> MAKH { get; set; }
+        public Nullable<int> MAACCOUNT { get; set; }
     
         public virtual ACCOUNT ACCOUNT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

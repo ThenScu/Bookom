@@ -28,6 +28,7 @@ namespace Bookom.Models
         public Nullable<int> SOLUONG { get; set; }
         public Nullable<int> MANSX { get; set; }
         public Nullable<int> MATL { get; set; }
+        public string ANHBIA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_HOADON> CT_HOADON { get; set; }

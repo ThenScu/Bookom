@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Bookom.Models.SACH>
+
+@{
+    ViewBag.Title = "Danh mục sách";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* Hiệu ứng cho khung thẻ (Card) */
+    .hover-card {
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-8px); /* Bay lên nhẹ */
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important; /* Đổ bóng đậm */
+            border-left-width: 8px !important; /* Viền xanh dày hơn */
+        }
+
+    /* Hiệu ứng cho ảnh bìa (Zoom) */
+    .img-container {
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+    .book-cover {
+        transition: transform 0.5s ease;
+    }
+
+    .hover-card:hover .book-cover {
+        transform: scale(1.1); /* Phóng to ảnh */
+    }
+</style>
+
+<div class="row">
+
+    <div class="col-md-3 mb-4">
+        <div class="card shadow border-0">
+            <div class="card-header bg-success text-white font-weight-bold text-uppercase">
+                <i class="fas fa-list mr-2"></i> Danh mục
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("SanPham", "Home")" class="list-group-item list-group-item-action font-weight-bold text-success">
+                    <i class="fas fa-caret-right mr-2"></i> Tất cả sách
+                </a>
+
+                @if (ViewBag.TheLoai != null)
+                {
+                    foreach (var tl in ViewBag.TheLoai)
+                    {
+                        <a href="@Url.Action("SanPham", "Home", new { maTL = tl.MATL })" class="list-group-item list-group-item-action">
+                            <i class="fas fa-book mr-2 text-gray-400"></i> @tl.TENTL
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h2 class="text-success font-weight-bold m-0 border-left-success pl-3">Danh sách sản phẩm</h2>
+            <span class="badge badge-success px-3 py-2">@Model.Count() kết quả</span>
+        </div>
+
+        <div class="row">
+            @if (Model.Count() == 0)
+            {
+                <div class="col-12 text-center py-5">
+                    <img src="https://cdn-icons-png.flaticon.com/512/4076/4076432.png" width="100" class="mb-3 opacity-50" />
+                    <h5 class="text-gray-600">Không tìm thấy cuốn sách nào trong danh mục này.</h5>
+                    <a href="@Url.Action("SanPham", "Home")" class="btn btn-outline-success mt-3">Quay lại xem tất cả</a>
+                </div>
+            }
+            else
+            {
+                foreach (var sp in Model)
+                {
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2 hover-card">
+                            <div class="card-body text-center">
+
+                                <div class="mb-3 img-container" style="height: 220px;">
+                                    <img src="@(string.IsNullOrEmpty(sp.ANHBIA) ? "https://dummyimage.com/200x300/cccccc/000000&text=No+Image" : Url.Content("~/Content/img/" + sp.ANHBIA))"
+                                         class="img-fluid rounded book-cover"
+                                         style="height: 100%; object-fit: cover;"
+                                         alt="@sp.TENSACH" />
+                                </div>
+
+                                <h5 class="card-title text-dark font-weight-bold text-truncate px-2" title="@sp.TENSACH">
+                                    @sp.TENSACH
+                                </h5>
+
+                                <div class="small text-muted mb-2">
+                                    <i class="fas fa-pen-nib"></i> @sp.TACGIA
+                                </div>
+
+                                <p class="text-danger font-weight-bold" style="font-size: 1.2rem;">
+                                    @String.Format("{0:0,0}", sp.GIA) VNĐ
+                                </p>
+
+                                <div class="btn-group w-100 px-3">
+                                    <a href="@Url.Action("ThemGioHang", "GioHang", new { maSach = sp.MASACH, strURL = Request.Url.ToString() })" class="btn btn-success btn-sm">
+                                        <i class="fas fa-cart-plus"></i> Mua
+                                    </a>
+                                    <a href="@Url.Action("ChiTiet", "Home", new { id = sp.MASACH })" class="btn btn-outline-success btn-sm">
+                                        Chi tiết
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>

@@ -25,7 +25,6 @@ namespace Bookom.Models
         public string DIACHI { get; set; }
         public string SDT { get; set; }
         public string EMAIL { get; set; }
-        public string MATKHAU { get; set; }
         public Nullable<int> MAACCOUNT { get; set; }
     
         public virtual ACCOUNT ACCOUNT { get; set; }

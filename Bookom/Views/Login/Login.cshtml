@@ -1,45 +1,138 @@
 ﻿@{
-    ViewBag.Title = "Đăng nhập";
-    Layout = null; 
+    ViewBag.Title = "Đăng nhập - Bookom";
+    Layout = null;
 }
 
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
-    <title>Đăng nhập</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        /* TẠO NỀN XANH GRADIENT */
+        body {
+            background-color: #1cc88a;
+            background-image: linear-gradient(180deg, #1cc88a 10%, #13855c 100%);
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            border: none;
+            border-radius: 1rem; /* Bo góc thẻ */
+        }
+
+        /* INPUT BO TRÒN (Kiểu SB Admin) */
+        .form-control-user {
+            border-radius: 10rem;
+            padding: 1.5rem 1rem;
+            height: auto;
+            font-size: 0.9rem;
+        }
+
+        /* NÚT BẤM XANH LÁ */
+        .btn-user {
+            border-radius: 10rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            background-color: #13855c;
+            border-color: #13855c;
+            color: white;
+            transition: all 0.3s;
+        }
+
+            .btn-user:hover {
+                background-color: #0e6645;
+                border-color: #0e6645;
+                transform: translateY(-2px); /* Hiệu ứng nhún nhẹ */
+            }
+
+        .brand-icon {
+            font-size: 3rem;
+            color: #13855c;
+        }
+    </style>
 </head>
-<body style="background-color: #f5f5f5;">
-    <div class="container mt-5">
-        <div class="col-md-4 offset-md-4">
-            <div class="card p-4 shadow">
-                <h3 class="text-center mb-4">Đăng nhập</h3>
+<body>
 
-                <form action="/Login/Login" method="post">
-                    <div class="form-group mb-3">
-                        <label>Email:</label>
-                        <input type="text" name="email" class="form-control" placeholder="Nhập email" required />
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-xl-5 col-lg-6 col-md-8">
+
+                <div class="card shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+
+                                    <div class="text-center mb-4">
+                                        <div class="brand-icon rotate-n-15 mb-2">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <h1 class="h4 text-gray-900 mb-2 font-weight-bold">Chào mừng trở lại!</h1>
+                                        <p class="text-muted mb-4">Đăng nhập hệ thống Bookom Store</p>
+                                    </div>
+
+                                    <form class="user" action="/Login/Login" method="post">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                   id="exampleInputEmail" aria-describedby="emailHelp"
+                                                   placeholder="Nhập địa chỉ Email..." required>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control form-control-user"
+                                                   id="exampleInputPassword" placeholder="Mật khẩu" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small pl-4">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <label class="custom-control-label" for="customCheck">Ghi nhớ đăng nhập</label>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-user btn-block shadow">
+                                            Đăng nhập
+                                        </button>
+
+                                        <hr>
+
+                                        
+                                    </form>
+
+                                    @if (ViewBag.ErrorMessage != null)
+                                    {
+                                        <div class="alert alert-danger mt-3 text-center rounded-pill small" role="alert">
+                                            <i class="fas fa-exclamation-triangle mr-1"></i> @ViewBag.ErrorMessage
+                                        </div>
+                                    }
+
+                                    <hr>
+
+                                    
+                                    <div class="text-center">
+                                        <a class="small text-success" href="/Login/Register">Chưa có tài khoản? Đăng ký ngay!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group mb-3">
-                        <label>Mật khẩu:</label>
-                        <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" required />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                </form>
-
-                @if (ViewBag.ErrorMessage != null)
-                {
-                    <div class="text-danger text-center mt-3">@ViewBag.ErrorMessage</div>
-                }
-
-                <div class="text-center mt-3">
-                    <a href="/Login/Register">Chưa có tài khoản? Đăng ký</a>
                 </div>
+
             </div>
+
         </div>
     </div>
+
 </body>
 </html>

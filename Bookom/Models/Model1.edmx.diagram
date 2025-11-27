@@ -4,26 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="909e3cc80ceb42dfb49b23e308e44ec3" Name="Diagram1">
-        <EntityTypeShape EntityType="QL_NHASACHModel.ACCOUNT" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.CT_HOADON" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.CT_NHAPHANG" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.HOADON" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.NHAPHANG" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.NHASANXUAT" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.SACH" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QL_NHASACHModel.THELOAI" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_HOADON_ACCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_KHACHHANG_ACCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_NHAPHANG_ACCOUNT" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_HOADON" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_SACH" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_NHAPHANG" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_SACH" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_HOADON_KHACHHANG" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_NHASANXUAT" ManuallyRouted="false" />
-        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_THELOAI" ManuallyRouted="false" />
+      <Diagram DiagramId="f6cce3661222479d9f39483d8a5ddda4" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_NHASACHModel.ACCOUNT" Width="1.5" PointX="5.75" PointY="7.75" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.CT_HOADON" Width="1.5" PointX="10.25" PointY="0.5" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.CT_NHAPHANG" Width="1.5" PointX="10.25" PointY="3.5" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.HOADON" Width="1.5" PointX="8" PointY="9.625" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.KHACHHANG" Width="1.5" PointX="5.75" PointY="11.375" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.NHAPHANG" Width="1.5" PointX="8" PointY="13.5" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.NHASANXUAT" Width="1.5" PointX="5.75" PointY="0.625" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.SACH" Width="1.5" PointX="8" PointY="2.875" />
+        <EntityTypeShape EntityType="QL_NHASACHModel.THELOAI" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_HOADON_ACCOUNT" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_KHACHHANG_ACCOUNT" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_NHAPHANG_ACCOUNT" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_HOADON" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_HOADON_SACH" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_NHAPHANG" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_CT_NHAPHANG_SACH" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_HOADON_KHACHHANG" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_NHASANXUAT" />
+        <AssociationConnector Association="QL_NHASACHModel.FK_SACH_THELOAI" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

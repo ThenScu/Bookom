@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Models\CT_NHAPHANG.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GioHang.cs" />
     <Compile Include="Models\HOADON.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -199,6 +201,26 @@
     <Content Include="Content\css\sb-admin-2.css" />
     <Content Include="Content\css\sb-admin-2.min.css" />
     <Content Include="Content\css\styles.css" />
+    <Content Include="Content\img\ChaGiau.jpg" />
+    <Content Include="Content\img\ChiPheo.jpg" />
+    <Content Include="Content\img\CleanCode.jpg" />
+    <Content Include="Content\img\ConanTap100.jpg" />
+    <Content Include="Content\img\DacNhanTam.jpg" />
+    <Content Include="Content\img\DoiThayDoi.jpg" />
+    <Content Include="Content\img\DoraemonTap1.png" />
+    <Content Include="Content\img\DoraemonTap2.jpg" />
+    <Content Include="Content\img\DoraemonTap3.png" />
+    <Content Include="Content\img\KhoiNghiep.jpg" />
+    <Content Include="Content\img\LapTrinhC.jpg" />
+    <Content Include="Content\img\MatBiec.jpg" />
+    <Content Include="Content\img\NhaGiaKim.png" />
+    <Content Include="Content\img\OnePiece.jpg" />
+    <Content Include="Content\img\RungNaUy.jpg" />
+    <Content Include="Content\img\SoDo.jpg" />
+    <Content Include="Content\img\Sql.png" />
+    <Content Include="Content\img\ThanDong.jpg" />
+    <Content Include="Content\img\ToiThay.jpg" />
+    <Content Include="Content\img\TuoiTre.jpg" />
     <Content Include="Content\img\undraw_posting_photo.svg" />
     <Content Include="Content\img\undraw_profile.svg" />
     <Content Include="Content\img\undraw_profile_1.svg" />
@@ -2107,6 +2129,12 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\KhachHang\UserInfo.cshtml" />
+    <Content Include="Views\Home\SanPham.cshtml" />
+    <Content Include="Views\Home\ChiTiet.cshtml" />
+    <Content Include="Views\GioHang\GioHang.cshtml" />
+    <Content Include="Views\GioHang\DatHang.cshtml" />
+    <Content Include="Views\GioHang\XacNhanDonHang.cshtml" />
+    <Content Include="Views\KhachHang\LichSuDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

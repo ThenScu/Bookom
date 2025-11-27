@@ -1,33 +1,92 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<Bookom.Models.SACH>
+
+@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<style>
+    /* Hiệu ứng cho khung thẻ (Card) */
+    .hover-card {
+        transition: all 0.3s ease-in-out; /* Chuyển động mượt trong 0.3s */
+        cursor: pointer;
+    }
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+        .hover-card:hover {
+            transform: translateY(-10px); /* Bay lên 10px */
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175) !important; /* Đổ bóng đậm */
+            border-left-width: 10px !important; /* Viền xanh bên trái dày hơn */
+        }
+
+    /* Hiệu ứng cho ảnh bìa (Zoom) */
+    .img-container {
+        overflow: hidden; /* Để ảnh zoom không bị tràn ra ngoài khung */
+        border-radius: 5px;
+    }
+
+    .book-cover {
+        transition: transform 0.5s ease;
+    }
+
+    .hover-card:hover .book-cover {
+        transform: scale(1.1); /* Phóng to 110% khi hover vào thẻ */
+    }
+</style>
+
+<div class="card shadow mb-4">
+    <div class="card-body bg-success text-white text-center rounded">
+        <h1 class="font-weight-bold">Chào mừng đến với Bookom Store</h1>
+        <p class="lead">Nơi hội tụ tri thức - Sách hay, giá tốt, giao hàng tận nơi!</p>
     </div>
-</main>
+</div>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800 font-weight-bold border-left-success pl-3">Sách Mới Nhập</h1>
+    <a href="@Url.Action("SanPham", "Home")" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+        <i class="fas fa-arrow-right fa-sm text-white-50"></i> Xem tất cả sách
+    </a>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-3 col-md-4 col-sm-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2 hover-card">
+                <div class="card-body">
+
+                    <div class="text-center mb-3 img-container">
+                        <img src="@(string.IsNullOrEmpty(item.ANHBIA) ? "https://dummyimage.com/200x300/cccccc/000000&text=No+Image" : Url.Content("~/Content/img/" + item.ANHBIA))"
+                             alt="@item.TENSACH"
+                             class="img-fluid rounded book-cover"
+                             style="height: 200px; object-fit: cover;">
+                    </div>
+
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="h6 font-weight-bold text-success text-uppercase mb-1 text-truncate" title="@item.TENSACH">
+                                @item.TENSACH
+                            </div>
+
+                            <div class="text-xs font-weight-bold text-gray-800 text-uppercase mb-1">
+                                <i class="fas fa-pen-nib"></i> @item.TACGIA
+                            </div>
+
+                            <div class="h5 mb-0 font-weight-bold text-danger">
+                                @String.Format("{0:0,0}", item.GIA) VNĐ
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 text-center">
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { maSach = item.MASACH, strURL = Request.Url.ToString() })" class="btn btn-success btn-sm btn-block">
+                            <i class="fas fa-cart-plus"></i> Thêm giỏ hàng
+                        </a>
+                        <a href="@Url.Action("ChiTiet", "Home", new { id = item.MASACH })" class="btn btn-outline-success btn-sm btn-block mt-2">
+                            Xem chi tiết
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

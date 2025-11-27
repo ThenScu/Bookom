@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Đặt hàng thành công";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+
+            <div class="card shadow-lg border-0 rounded-lg">
+                <div class="card-body p-5">
+
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+                    </div>
+
+                    <h2 class="text-success font-weight-bold mb-3">ĐẶT HÀNG THÀNH CÔNG!</h2>
+
+                    <p class="lead text-gray-800 mb-4">
+                        Cảm ơn bạn đã mua sách tại <b>Bookom Store</b>.<br />
+                        Đơn hàng của bạn đã được hệ thống ghi nhận và sẽ sớm được giao đến.
+                    </p>
+
+                    <div class="alert alert-success border-left-success" role="alert">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Nhân viên sẽ liên hệ với bạn qua số điện thoại để xác nhận trong vòng 24h.
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="d-flex justify-content-center">
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-success btn-lg shadow px-5">
+                            <i class="fas fa-arrow-left mr-2"></i> Tiếp tục mua sách
+                        </a>
+                    </div>
+
+                    @if (Session["UserName"] != null)
+                    {
+                        <div class="mt-3">
+                            <a href="@Url.Action("UserInfo", "KhachHang")" class="text-success small" style="text-decoration: underline;">
+                                Xem lịch sử đơn hàng của tôi
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
