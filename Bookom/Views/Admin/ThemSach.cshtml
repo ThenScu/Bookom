@@ -1,0 +1,50 @@
+﻿@model Bookom.Models.SACH
+
+@{
+    ViewBag.Title = "Thêm sách";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>NHẬP SÁCH MỚI</h2>
+
+@using (Html.BeginForm("ThemSach", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <label>Tên sách:</label>
+            <input type="text" name="TENSACH" class="form-control" required placeholder="Nhập tên sách..." />
+
+            <br />
+            <label>Tác giả:</label>
+            <input type="text" name="TACGIA" class="form-control" required placeholder="Nhập tên tác giả..." />
+
+            <br />
+            <label>Giá bán (VNĐ):</label>
+            <input type="number" name="GIA" class="form-control" required min="1000" step="1000" value="10000" />
+            <small class="text-muted">Giá phải lớn hơn 0 (Tối thiểu 1.000đ)</small>
+        </div>
+
+        <div class="col-md-6">
+            <label>Số lượng:</label>
+            <input type="number" name="SOLUONG" class="form-control" required min="1" value="10" />
+            <small class="text-muted">Số lượng phải từ 1 trở lên</small>
+
+            <br />
+            <label>Nhà xuất bản:</label>
+            @Html.DropDownList("MaNSX", null, new { @class = "form-control" })
+
+            <br />
+            <label>Thể loại:</label>
+            @Html.DropDownList("MaTL", null, new { @class = "form-control" })
+
+            <br />
+            <label>Chọn ảnh bìa:</label>
+            <input type="file" name="fileUpload" required />
+        </div>
+    </div>
+
+    <hr />
+
+    <button type="submit" class="btn btn-primary btn-lg">LƯU SÁCH</button>
+    <a href="@Url.Action("QuanLySach", "Admin")" class="btn btn-secondary btn-lg">Quay lại</a>
+}

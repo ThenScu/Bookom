@@ -101,8 +101,7 @@ namespace Bookom.Controllers
 
             if (donhang == null) return HttpNotFound();
 
-            // Lấy danh sách chi tiết (Sách gì, bao nhiêu cuốn)
-            // Code này dùng tính năng Lazy Loading của Entity Framework (CT_HOADON có sẵn trong HOADON)
+            // Lấy danh sách chi tiết
             return View(donhang);
         }
     }

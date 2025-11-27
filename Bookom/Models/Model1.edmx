@@ -45,6 +45,7 @@
           <Property Name="NGAYLAP" Type="date" Nullable="false" />
           <Property Name="MAKH" Type="int" />
           <Property Name="MAACCOUNT" Type="int" />
+          <Property Name="TINHTRANG" Type="int" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -371,6 +372,7 @@
           <NavigationProperty Name="ACCOUNT" Relationship="QL_NHASACHModel.FK_HOADON_ACCOUNT" FromRole="HOADON" ToRole="ACCOUNT" />
           <NavigationProperty Name="CT_HOADON" Relationship="QL_NHASACHModel.FK_CT_HOADON_HOADON" FromRole="HOADON" ToRole="CT_HOADON" />
           <NavigationProperty Name="KHACHHANG" Relationship="QL_NHASACHModel.FK_HOADON_KHACHHANG" FromRole="HOADON" ToRole="KHACHHANG" />
+          <Property Name="TINHTRANG" Type="Int32" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -593,6 +595,7 @@
           <EntitySetMapping Name="HOADONs">
             <EntityTypeMapping TypeName="QL_NHASACHModel.HOADON">
               <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="TINHTRANG" ColumnName="TINHTRANG" />
                 <ScalarProperty Name="MAACCOUNT" ColumnName="MAACCOUNT" />
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="NGAYLAP" ColumnName="NGAYLAP" />

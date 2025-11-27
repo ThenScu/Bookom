@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Bookom.Models.SACH>
+
+@{
+    ViewBag.Title = "Quản lý sách";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>KHO SÁCH</h2>
+
+<p>
+    <a href="@Url.Action("ThemSach", "Admin")" class="btn btn-success">
+        + Thêm sách mới
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <thead class="bg-success text-white">
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Ảnh</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>NXB / Thể loại</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.MASACH</td>
+                <td>@item.TENSACH <br /> <small>TG: @item.TACGIA</small></td>
+                <td>
+                    <img src="@Url.Content("~/Content/img/" + item.ANHBIA)" width="60" />
+                </td>
+                <td style="color:red; font-weight:bold;">
+                    @String.Format("{0:0,0}", item.GIA)
+                </td>
+                <td>@item.SOLUONG</td>
+                <td>
+                    NXB: @(item.NHASANXUAT != null ? item.NHASANXUAT.TENNSX : "") <br />
+                    TL: @(item.THELOAI != null ? item.THELOAI.TENTL : "")
+                </td>
+                <td>
+                    <a href="@Url.Action("XoaSach", "Admin", new { id = item.MASACH })"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Xóa cuốn này hả?');">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

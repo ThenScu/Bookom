@@ -24,18 +24,16 @@ namespace Bookom.Controllers
 
             if (user != null)
             {
-                // [SỬA LẠI QUAN TRỌNG]: 
-                // Session["UserName"] phải lưu EMAIL (là cái duy nhất) để các trang khác dùng để tìm kiếm
+                // ... Các dòng cũ ...
                 Session["UserName"] = user.EMAIL;
-
-                // Session["Name"] dùng để hiển thị "Xin chào..."
                 Session["Name"] = user.NAME;
+
+                // [QUAN TRỌNG] THÊM DÒNG NÀY ĐỂ TRANG ADMIN HIỂU QUYỀN HẠN
+                Session["UserType"] = user.TYPEACCOUNT;
 
                 // Phân quyền
                 if (user.TYPEACCOUNT == "Admin")
-                    return RedirectToAction("Index", "Admin"); // Chỉnh lại Controller Admin nếu cần
-                else if (user.TYPEACCOUNT == "NhanVien")
-                    return RedirectToAction("Index", "NhanVien"); // Chỉnh lại Controller NV nếu cần
+                    return RedirectToAction("Index", "Admin");
                 else
                     return RedirectToAction("Index", "Home");
             }

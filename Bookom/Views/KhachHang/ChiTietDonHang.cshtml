@@ -1,0 +1,102 @@
+﻿@model Bookom.Models.HOADON
+
+@{
+    ViewBag.Title = "Chi tiết đơn hàng #" + Model.MAHD;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">
+        Chi tiết đơn hàng <span class="text-success">#@Model.MAHD</span>
+    </h1>
+    <a href="@Url.Action("LichSuDonHang", "KhachHang")" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+        <i class="fas fa-arrow-left fa-sm text-white-50"></i> Quay lại lịch sử
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 bg-success text-white">
+                <h6 class="m-0 font-weight-bold">Trạng thái đơn hàng</h6>
+            </div>
+            <div class="card-body">
+                <h5 class="text-center font-weight-bold">
+                    @if (Model.TINHTRANG == 1)
+                    {
+                        <span class="text-success"><i class="fas fa-check-circle"></i> Đã xác nhận</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger"><i class="fas fa-clock"></i> Chờ xác nhận</span>
+                    }
+                </h5>
+                <hr />
+                <p><strong>Ngày đặt:</strong> @String.Format("{0:dd/MM/yyyy HH:mm}", Model.NGAYLAP)</p>
+                <p><strong>Người nhận:</strong> @(Model.KHACHHANG != null ? Model.KHACHHANG.TENKH : "N/A")</p>
+                <p><strong>SĐT:</strong> @(Model.KHACHHANG != null ? Model.KHACHHANG.SDT : "N/A")</p>
+                <p><strong>Địa chỉ:</strong> @(Model.KHACHHANG != null ? Model.KHACHHANG.DIACHI : "N/A")</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-success">Sản phẩm đã mua</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Sách</th>
+                                <th class="text-center">Giá</th>
+                                <th class="text-center">SL</th>
+                                <th class="text-center">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ decimal tongCong = 0; }
+                            @if (Model.CT_HOADON != null)
+                            {
+                                foreach (var ct in Model.CT_HOADON)
+                                {
+                                    decimal thanhTien = (ct.DONGIA ?? 0) * (ct.SOLUONG ?? 0);
+                                    tongCong += thanhTien;
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                @if (ct.SACH != null)
+                                                {
+                                                    <img src="@Url.Content("~/Content/img/" + ct.SACH.ANHBIA)"
+                                                         width="40" height="60" class="mr-2 rounded border" style="object-fit:cover">
+                                                    <span>@ct.SACH.TENSACH</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">Sách đã ngừng kinh doanh</span>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td class="text-center">@String.Format("{0:0,0}", ct.DONGIA)</td>
+                                        <td class="text-center">@ct.SOLUONG</td>
+                                        <td class="text-right font-weight-bold">@String.Format("{0:0,0}", thanhTien)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-gray-100">
+                                <td colspan="3" class="text-right font-weight-bold text-success">TỔNG CỘNG ĐƠN HÀNG:</td>
+                                <td class="text-right font-weight-bold text-danger" style="font-size: 1.2rem;">
+                                    @String.Format("{0:0,0} VNĐ", tongCong)
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

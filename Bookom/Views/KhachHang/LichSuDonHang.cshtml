@@ -29,7 +29,8 @@
                             <th>Ngày đặt</th>
                             <th>Người nhận</th>
                             <th>Tổng tiền</th>
-                            <th>Chi tiết</th>
+                            <th class="text-center">Trạng thái</th>
+                            <th class="text-center">Chi tiết</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +45,6 @@
 
                                 <td class="text-danger font-weight-bold">
                                     @{
-                                        // Vì trong HOADON không có cột TongTien, ta phải tính từ CT_HOADON
                                         decimal tongTien = 0;
                                         if (item.CT_HOADON != null)
                                         {
@@ -52,6 +52,21 @@
                                         }
                                     }
                                     @String.Format("{0:0,0}", tongTien) VNĐ
+                                </td>
+
+                                <td class="text-center">
+                                    @if (item.TINHTRANG == 1)
+                                    {
+                                        <span class="badge badge-success px-2 py-1">
+                                            <i class="fas fa-check-circle"></i> Đã xác nhận
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger px-2 py-1">
+                                            <i class="fas fa-clock"></i> Chờ xác nhận
+                                        </span>
+                                    }
                                 </td>
 
                                 <td class="text-center">
