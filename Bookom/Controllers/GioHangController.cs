@@ -156,68 +156,61 @@ namespace Bookom.Controllers
         }
 
         // 8. Xử lý Đặt Hàng (Lưu vào SQL)
+        // [HttpPost] Đặt hàng: LƯU VÀO SQL
         [HttpPost]
         public ActionResult DatHang(FormCollection collection)
         {
-            // 1. Kiểm tra đăng nhập (Bắt buộc phải đăng nhập mới mua được)
-            if (Session["UserName"] == null || Session["UserName"].ToString() == "")
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            // 1. Kiểm tra giỏ hàng
+            List<GioHang> lstGioHang = LayGioHang();
+            if (lstGioHang == null || lstGioHang.Count == 0)
+                return RedirectToAction("GioHang");
 
-            // 2. Lấy thông tin tài khoản đang đăng nhập
-            // Giả sử Session["UserName"] lưu Email đăng nhập
-            string emailUser = Session["UserName"].ToString();
-
-            // Tìm Account trong DB
+            // 2. Lấy thông tin khách hàng (Logic cũ của bạn)
+            var emailUser = Session["UserName"].ToString();
             var account = data.ACCOUNTs.FirstOrDefault(a => a.EMAIL == emailUser);
-
-            // [QUAN TRỌNG] Kiểm tra nếu không tìm thấy tài khoản thì đá về trang Login ngay
-            if (account == null)
-            {
-                // Có thể session bị lỗi hoặc tài khoản đã bị xóa trong DB
-                Session["UserName"] = null;
-                return RedirectToAction("Login", "Login");
-            }
-
-            // Tìm Khách hàng tương ứng với Account đó
             var khachHang = data.KHACHHANGs.FirstOrDefault(k => k.MAACCOUNT == account.MAACCOUNT);
 
-            if (khachHang == null)
-            {
-                // ... code cũ của bạn
-                return RedirectToAction("Index", "Home");
-            }
+            if (khachHang == null) return RedirectToAction("Login", "Login");
 
-            // 3. TẠO HÓA ĐƠN
+            // 3. TẠO VÀ LƯU HÓA ĐƠN
             HOADON ddh = new HOADON();
-            ddh.MAKH = khachHang.MAKH; // Gán mã khách hàng của người đang đăng nhập
+            ddh.MAKH = khachHang.MAKH;
             ddh.NGAYLAP = DateTime.Now;
-
-            // Lưu ý: Nếu muốn cập nhật địa chỉ giao hàng mới từ Form nhập liệu vào Hóa đơn
-            // Bạn có thể lưu vào ghi chú hoặc update lại thông tin khách hàng ở đây
-            // Ví dụ: ddh.DIACHIGIAO = collection["DiaChiKH"]; (Nếu bảng HOADON có cột này)
+            ddh.TINHTRANG = 0; // 0: Chờ duyệt
 
             data.HOADONs.Add(ddh);
-            data.SaveChanges(); // <--- LƯU ĐỂ SINH RA MÃ HÓA ĐƠN (MAHD)
+            data.SaveChanges(); // Lưu xong để lấy được MAHD
 
             // 4. LƯU CHI TIẾT HÓA ĐƠN
-            List<GioHang> lstGioHang = LayGioHang();
             foreach (var item in lstGioHang)
             {
                 CT_HOADON cthd = new CT_HOADON();
-                cthd.MAHD = ddh.MAHD; // Lấy MAHD vừa sinh ra ở trên
+                cthd.MAHD = ddh.MAHD;
                 cthd.MASACH = item.iMaSach;
                 cthd.SOLUONG = item.iSoLuong;
                 cthd.DONGIA = (decimal)item.dDonGia;
 
                 data.CT_HOADON.Add(cthd);
             }
-            data.SaveChanges(); // Lưu tất cả chi tiết
+            data.SaveChanges();
 
-            // 5. XÓA GIỎ HÀNG VÀ HOÀN TẤT
-            Session["GioHang"] = null;
-            return RedirectToAction("XacNhanDonHang", "GioHang");
+            // =========================================================================
+            // KIỂM TRA NÚT BẤM ĐỂ CHUYỂN HƯỚNG
+            // =========================================================================
+
+            string paymentMethod = collection["paymentMethod"]; // Lấy giá trị từ nút bấm (TienMat hoặc MoMo)
+
+            if (paymentMethod == "MoMo")
+            {
+                // Nếu chọn MoMo: KHÔNG xóa giỏ hàng vội, chuyển sang trang thanh toán MoMo
+                return RedirectToAction("Payment", "MoMo");
+            }
+            else
+            {
+                // Nếu chọn Tiền Mặt: Xóa giỏ hàng và hiện thông báo thành công luôn
+                Session["GioHang"] = null;
+                return RedirectToAction("XacNhanDonHang", "GioHang");
+            }
         }
 
         public ActionResult XacNhanDonHang()

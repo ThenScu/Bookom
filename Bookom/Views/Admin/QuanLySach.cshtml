@@ -43,6 +43,11 @@
                     TL: @(item.THELOAI != null ? item.THELOAI.TENTL : "")
                 </td>
                 <td>
+                    <a href="@Url.Action("SuaSach", "Admin", new { id = item.MASACH })"
+                       class="btn btn-warning btn-sm"
+                       title="Sửa thông tin">
+                        <i class="fas fa-edit"></i> Sửa
+                    </a>
                     <a href="@Url.Action("XoaSach", "Admin", new { id = item.MASACH })"
                        class="btn btn-danger btn-sm"
                        onclick="return confirm('Xóa cuốn này hả?');">

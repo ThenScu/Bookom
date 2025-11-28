@@ -5,6 +5,12 @@
     ViewBag.Title = "Giỏ hàng của bạn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger text-center font-weight-bold">
+        <i class="fas fa-exclamation-triangle"></i> @ViewBag.Error
+    </div>
+}
 
 <h2 class="text-success text-center font-weight-bold">THÔNG TIN GIỎ HÀNG</h2>
 

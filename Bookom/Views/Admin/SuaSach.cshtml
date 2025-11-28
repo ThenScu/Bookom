@@ -1,0 +1,69 @@
+﻿@model Bookom.Models.SACH
+
+@{
+    ViewBag.Title = "Cập nhật sách";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card shadow mb-4 border-left-warning">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-warning">CẬP NHẬT THÔNG TIN SÁCH (Mã: @Model.MASACH)</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("SuaSach", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.MASACH)
+            @Html.HiddenFor(model => model.ANHBIA) <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">Tên sách:</label>
+                    @Html.EditorFor(model => model.TENSACH, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">Tác giả:</label>
+                    @Html.EditorFor(model => model.TACGIA, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label class="font-weight-bold">Giá bán:</label>
+                    @Html.EditorFor(model => model.GIA, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = 1000 } })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label class="font-weight-bold">Số lượng:</label>
+                    @Html.EditorFor(model => model.SOLUONG, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = 1 } })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    <label class="font-weight-bold">Ảnh bìa:</label>
+                    <input type="file" name="fileUpload" class="form-control-file border p-1" />
+                    <div class="mt-2">
+                        <small>Ảnh hiện tại:</small><br />
+                        <img src="@Url.Content("~/Content/img/" + Model.ANHBIA)" width="80" class="rounded border" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">Nhà xuất bản:</label>
+                    @Html.DropDownList("MaNSX", null, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label class="font-weight-bold">Thể loại:</label>
+                    @Html.DropDownList("MaTL", null, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <hr />
+            <button type="submit" class="btn btn-warning btn-lg shadow text-white">
+                <i class="fas fa-edit"></i> Cập nhật
+            </button>
+            <a href="@Url.Action("QuanLySach", "Admin")" class="btn btn-secondary btn-lg">Hủy</a>
+        }
+    </div>
+</div>

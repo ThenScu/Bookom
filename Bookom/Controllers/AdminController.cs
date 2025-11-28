@@ -162,5 +162,67 @@ namespace Bookom.Controllers
             // Bước 3: Xong thì quay về danh sách
             return RedirectToAction("QuanLySach");
         }
+
+        // 7. SỬA SÁCH 
+        [HttpGet]
+        public ActionResult SuaSach(int id)
+        {
+            if (Session["UserType"] == null || Session["UserType"].ToString() != "Admin")
+                return RedirectToAction("Login", "Login");
+
+            // 1. Lấy cuốn sách cần sửa
+            SACH sach = data.SACHes.SingleOrDefault(n => n.MASACH == id);
+            if (sach == null) return HttpNotFound();
+
+            // 2. Đưa dữ liệu vào DropdownList (và chọn sẵn giá trị cũ)
+            ViewBag.MaNSX = new SelectList(data.NHASANXUATs.ToList(), "MANSX", "TENNSX", sach.MANSX);
+            ViewBag.MaTL = new SelectList(data.THELOAIs.ToList(), "MATL", "TENTL", sach.MATL);
+
+            return View(sach);
+        }
+
+        // 8. SỬA SÁCH (LƯU DỮ LIỆU)
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult SuaSach(SACH sach, HttpPostedFileBase fileUpload)
+        {
+            // B1: Đảm bảo Dropdownlist vẫn có dữ liệu (phòng khi lỗi)
+            ViewBag.MaNSX = new SelectList(data.NHASANXUATs.ToList(), "MANSX", "TENNSX", sach.MANSX);
+            ViewBag.MaTL = new SelectList(data.THELOAIs.ToList(), "MATL", "TENTL", sach.MATL);
+
+            // B2: Tìm sách cũ trong DB (để cập nhật trạng thái Entity)
+            var sachDB = data.SACHes.FirstOrDefault(s => s.MASACH == sach.MASACH);
+
+            if (sachDB != null)
+            {
+                // B3: Cập nhật các trường thông tin cơ bản
+                sachDB.TENSACH = sach.TENSACH;
+                sachDB.GIA = sach.GIA;
+                sachDB.SOLUONG = sach.SOLUONG;
+                sachDB.TACGIA = sach.TACGIA;
+                sachDB.MANSX = sach.MANSX;
+                sachDB.MATL = sach.MATL;
+
+                // B4: Xử lý ảnh (Nếu có chọn ảnh mới thì cập nhật, không thì giữ nguyên ảnh cũ)
+                if (fileUpload != null)
+                {
+                    var fileName = System.IO.Path.GetFileName(fileUpload.FileName);
+                    var path = System.IO.Path.Combine(Server.MapPath("~/Content/img"), fileName);
+                    fileUpload.SaveAs(path);
+                    sachDB.ANHBIA = fileName; // Gán tên ảnh mới
+                }
+
+                try
+                {
+                    data.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Lỗi khi cập nhật Database: " + ex.InnerException?.InnerException?.Message;
+                    return View(sach);
+                }
+            }
+            return RedirectToAction("QuanLySach");
+        }
     }
 }
